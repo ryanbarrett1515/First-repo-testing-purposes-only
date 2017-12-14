@@ -18,13 +18,8 @@ public class FileInputStuff {
         Scanner userInput = new Scanner(System.in);
         ArrayList<Person> list = new ArrayList<>();
 
-        list.add(new Person("mike", "tyson", "1905"));
-        try {
-            makeList(list);
-        } catch (Exception exception) {
-        }
         try{
-            FileInputStream fileReader = new FileInputStream("People");
+            FileInputStream fileReader = new FileInputStream("People/People.CSV");
             Scanner fileScanner = new Scanner(fileReader);
             list = getList(fileScanner);
             
@@ -33,14 +28,14 @@ public class FileInputStuff {
                 System.out.println(list.get(i));
             String entry = "";
             getPeople(entry, userInput, list);
-            makeList(list);
+            makeList(list, "People/People.CSV");
         }catch(Exception e){
             System.out.println("Something went wrong");
         }
     }
 
     //returns list of persons
-    static ArrayList<Person> getList(Scanner fileScanner){
+    public static ArrayList<Person> getList(Scanner fileScanner){
         ArrayList<Person> list = new ArrayList<>();
         while(fileScanner.hasNextLine())
             list.add(getPerson(fileScanner.nextLine()));
@@ -48,19 +43,17 @@ public class FileInputStuff {
     }
 
     //makes list of persons on file
-    static void makeList(ArrayList<Person> list) throws Exception{
-        FileOutputStream finalFile = new FileOutputStream("../Serialization/People.CSV");
+    public static void makeList(ArrayList<Person> list, String name) throws Exception{
+        FileOutputStream finalFile = new FileOutputStream(name);
         PrintWriter fileWriter = new PrintWriter(finalFile);
         for(int i = 0; i < list.size(); i++)
             fileWriter.println(list.get(i).getFirstName() + ", "
                 + list.get(i).getLastName() + ", " + list.get(i).getDOB());
         fileWriter.close();
-        File myFile = new File("People.CSV");
-        System.out.println("Info " + myFile.getAbsolutePath());
     }
 
     //gets more people from user
-    static void getPeople(String entry, Scanner userInput, ArrayList<Person> list){
+    public static void getPeople(String entry, Scanner userInput, ArrayList<Person> list){
         while(!entry.equals("q")){            
             if(entry.equals("a"))
                 for(int i = 0; i < list.size(); i++)
@@ -73,7 +66,8 @@ public class FileInputStuff {
         }
     }
 
-    static Person getPerson(String entry){
+    //creates a person from a line of code
+    public static Person getPerson(String entry){
         String firstName = entry.substring(0, entry.indexOf(",")).trim();
         String lastName = entry.substring(entry.indexOf(",") + 1, entry.lastIndexOf(",")).trim();
         String DOB = entry.substring(entry.lastIndexOf(",") + 1).trim();
