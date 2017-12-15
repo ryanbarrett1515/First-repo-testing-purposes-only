@@ -8,6 +8,7 @@ package org.cirdles.fileinputstuff;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.Test;
+import java.io.FileInputStream;
 import static org.junit.Assert.*;
 
 /**
@@ -15,34 +16,25 @@ import static org.junit.Assert.*;
  * @author RyanBarrett
  */
 public class FileInputStuffTest {
-    
-    public FileInputStuffTest() {
-    }
-
-    /**
-     * Test of main method, of class FileInputStuff.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        FileInputStuff.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
      * Test of getList method, of class FileInputStuff.
      */
     @Test
     public void testGetList() {
-        System.out.println("getList");
-        Scanner fileScanner = null;
-        ArrayList<Person> expResult = null;
-        ArrayList<Person> result = FileInputStuff.getList(fileScanner);
-        assertEquals(expResult, result);
+        try {
+            System.out.println("getList");
+            Scanner fileScanner = new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV"));
+            ArrayList<Person> expResult = new ArrayList<>();
+            expResult.add(new Person("Mike", "Tyson", "1905"));
+            expResult.add(new Person("first", "last", "date"));
+            expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
+            ArrayList<Person> result = FileInputStuff.getList(fileScanner);
+            assertEquals(expResult, result);
+        } catch (Exception e) {
+            fail("Exception thrown: " + e.getMessage());
+        }
+
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -51,25 +43,11 @@ public class FileInputStuffTest {
     @Test
     public void testMakeList() throws Exception {
         System.out.println("makeList");
-        ArrayList<Person> list = null;
-        String name = "";
-        FileInputStuff.makeList(list, name);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPeople method, of class FileInputStuff.
-     */
-    @Test
-    public void testGetPeople() {
-        System.out.println("getPeople");
-        String entry = "";
-        Scanner userInput = null;
-        ArrayList<Person> list = null;
-        FileInputStuff.getPeople(entry, userInput, list);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList<Person> expResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
+        String name = "PeopleTest/PeopleTest.CSV";
+        FileInputStuff.makeList(expResult, name);
+        ArrayList<Person> actualResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
+        assertEquals(actualResult, expResult);
     }
 
     /**
@@ -78,12 +56,9 @@ public class FileInputStuffTest {
     @Test
     public void testGetPerson() {
         System.out.println("getPerson");
-        String entry = "";
-        Person expResult = null;
+        String entry = "Ryan, Barrett, 5/12/1999";
+        Person expResult = new Person("Ryan", "Barrett", "5/12/1999");
         Person result = FileInputStuff.getPerson(entry);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-    
 }
