@@ -56,7 +56,7 @@ public class Person implements Comparable, Serializable {
         int returnValue = 0;
         if (!(o instanceof Person)) {
             returnValue = -1;
-        } else if (!(((Person) o).equals(this.toString()))) {
+        } else if (!(((Person) o).toString().equals(this.toString()))) {
             returnValue = 1;
         }
         return returnValue;

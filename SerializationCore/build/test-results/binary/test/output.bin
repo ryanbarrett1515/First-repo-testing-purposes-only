@@ -1,4 +1,8 @@
-	makeList
-
+getList
+	makeList
+
 getPerson
-getList
+testCompareToSame
+testCompareToSame
+testEqualsDifferent
+	testEqualsSame
