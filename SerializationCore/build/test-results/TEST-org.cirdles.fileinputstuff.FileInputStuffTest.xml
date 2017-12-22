@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.cirdles.fileinputstuff.FileInputStuffTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-12-22T03:20:57" hostname="Ryans-MacBook-Pro.local" time="0.098">
+  <properties/>
+  <testcase name="testGetList" classname="org.cirdles.fileinputstuff.FileInputStuffTest" time="0.089"/>
+  <testcase name="testMakeList" classname="org.cirdles.fileinputstuff.FileInputStuffTest" time="0.006"/>
+  <testcase name="testGetPerson" classname="org.cirdles.fileinputstuff.FileInputStuffTest" time="0.001"/>
+  <system-out><![CDATA[getList
+makeList
+getPerson
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
