@@ -1,8 +1,0 @@
-getList
-	makeList
-
-getPerson
-testCompareToSame
-testCompareToSame
-testEqualsDifferent
-	testEqualsSame
