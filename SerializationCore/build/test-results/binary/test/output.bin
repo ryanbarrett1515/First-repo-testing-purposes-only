@@ -2,7 +2,15 @@
 	makeList
 
 getPerson
-testEqualsSame
-testEqualsDifferent
-testCompareToSame
-	testCompareToSame
+getList
+	makeList
+
+getPerson
+
+	testEqualsDifferent
+
+testCompareToSame
+
+testEqualsSame
+
+testCompareToSame

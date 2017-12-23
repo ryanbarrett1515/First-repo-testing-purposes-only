@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.cirdles.fileinputstuff.BinarySerializationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-12-23T06:07:37" hostname="Ryans-MacBook-Pro.local" time="0.015">
+  <properties/>
+  <testcase name="testGetList" classname="org.cirdles.fileinputstuff.BinarySerializationTest" time="0.008"/>
+  <testcase name="testMakeList" classname="org.cirdles.fileinputstuff.BinarySerializationTest" time="0.005"/>
+  <testcase name="testGetPerson" classname="org.cirdles.fileinputstuff.BinarySerializationTest" time="0.0"/>
+  <system-out><![CDATA[getList
+makeList
+getPerson
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
