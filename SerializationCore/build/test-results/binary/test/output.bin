@@ -7,10 +7,10 @@ getPerson
 
 getPerson
 
-	testEqualsDifferent
+	testEqualsSame
 
-testCompareToSame
+testEqualsDifferent
 
-testEqualsSame
+testCompareToSame
 
 testCompareToSame

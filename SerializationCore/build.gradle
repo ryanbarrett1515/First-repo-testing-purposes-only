@@ -19,6 +19,11 @@ dependencies {
     //   By default, only the Maven Central Repository is specified in
     //   parent.gradle.
     //
+    
     // You can read more about how to add dependency here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+    // https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
+
+
 }
