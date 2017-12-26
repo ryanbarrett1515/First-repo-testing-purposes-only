@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import com.thoughtworks.xstream.XStream;
+import org.dom4j.io.SAXReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -25,6 +26,7 @@ public class XMLSerialization {
 
     //returns list of persons
     public static ArrayList<Person> getList() throws Exception {
+        return new ArrayList<Person>();
     }
 
     //makes list of persons on file
