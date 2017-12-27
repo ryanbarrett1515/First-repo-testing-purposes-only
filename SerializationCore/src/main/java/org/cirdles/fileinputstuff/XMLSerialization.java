@@ -25,8 +25,8 @@ public class XMLSerialization {
     public static void main(String[] args) {
         ArrayList<Person> list;
         Scanner scan = new Scanner(System.in);
-        File file = new File("XML");
         try{
+            File file = new File("XML");
             list = getList(file);
             System.out.println("Current people on file: ");
             for(int i = 0; i < list.size(); i++)
@@ -40,12 +40,17 @@ public class XMLSerialization {
 
     //returns list of persons
     public static ArrayList<Person> getList(File file) throws Exception {
+        
         ArrayList<Person> list = new ArrayList<Person>();
+        try{
         SAXReader saxReader = new SAXReader();
         Document doc = saxReader.read(file);
-        List<Node> nodes = doc.selectNodes("People/Person");
+        List<Node> nodes = doc.selectNodes("People");
         for(Node node: nodes)
             list.add(new Person(node.selectSingleNode("first").getText(), node.selectSingleNode("last").getText(), node.selectSingleNode("dob").getText()));
+        }catch(Exception e){
+            System.out.println("Something went wrong with doc stuff");
+        }
         return list;
     }
 
