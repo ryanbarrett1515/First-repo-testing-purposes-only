@@ -10,6 +10,7 @@ package org.cirdles.fileinputstuff;
  * @author RyanBarrett
  */
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,15 +28,13 @@ public class XMLSerialization {
         Scanner scan = new Scanner(System.in);
         try {
             File file = new File("XML/people.xml");
-            SAXBuilder builder = new SAXBuilder();
-            Document doc = (Document) builder.build(file);
-            list = getList(doc);
+            list = getList(file);
             System.out.println("Current people on file: ");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(list.get(i));
             }
             getPeople(scan, list);
-            makeList(list, doc);
+            makeList(list, file);
         } catch (IOException e) {
             System.out.println("Something went wrong with io: " + e.getMessage());
         } catch (Exception e) {
@@ -44,9 +43,11 @@ public class XMLSerialization {
     }
 
     //returns list of persons
-    public static ArrayList<Person> getList(Document doc) {
+    public static ArrayList<Person> getList(File file) {
         ArrayList<Person> list = new ArrayList<>();
         try {
+            SAXBuilder builder = new SAXBuilder();
+            Document doc = (Document) builder.build(file);
             Element root = doc.getRootElement();
             List nodes = root.getChildren("person");
             for(int i = 0; i < nodes.size(); i++){
@@ -60,8 +61,20 @@ public class XMLSerialization {
     }
 
     //makes list of persons on file
-    public static void makeList(ArrayList<Person> list, Document doc) throws Exception {
+    public static void makeList(ArrayList<Person> list, File file) throws Exception {
         XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+        SAXBuilder builder = new SAXBuilder();
+        Document doc = (Document) builder.build(file);
+        ArrayList<Person> current = getList(file);
+        Element root = doc.getRootElement();
+        for(int i = list.size() - current.size(); i < list.size(); i++){
+            Element person = new Element("person");
+            person.addContent(new Element("first").setText(list.get(i).getFirstName()));
+            person.addContent(new Element("last").setText(list.get(i).getLastName()));
+            person.addContent(new Element("dob").setText(list.get(i).getDOB()));
+            root.addContent(person);
+        }
+        outputter.output(doc, new FileWriter(file));
     }
 
     //gets more people from user

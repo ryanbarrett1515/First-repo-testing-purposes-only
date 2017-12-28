@@ -22,13 +22,11 @@ public class XMLSerializationTest {
 
             System.out.println("getList");
             File file = new File("XMLTest/peopleTest.xml");
-            SAXBuilder builder = new SAXBuilder();
-            Document doc = (Document) builder.build(file);
             ArrayList<Person> expResult = new ArrayList<>();
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
-            ArrayList<Person> result = XMLSerialization.getList(doc);
+            ArrayList<Person> result = XMLSerialization.getList(file);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
@@ -38,12 +36,10 @@ public class XMLSerializationTest {
     public void testMakeList() {
         try {
             File file = new File("XMLTest/peopleTest.xml");
-            SAXBuilder builder = new SAXBuilder();
-            Document doc = (Document) builder.build(file);
             System.out.println("makeList");
-            ArrayList<Person> expResult = XMLSerialization.getList(doc);
-            XMLSerialization.makeList(expResult, doc);
-            ArrayList<Person> actualResult = XMLSerialization.getList(doc);
+            ArrayList<Person> expResult = XMLSerialization.getList(file);
+            XMLSerialization.makeList(expResult, file);
+            ArrayList<Person> actualResult = XMLSerialization.getList(file);
             assertEquals(actualResult, expResult);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
