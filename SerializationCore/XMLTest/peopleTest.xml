@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<people>
+	<person>
+		<first>Mike</first>
+		<last>Tyson</last>
+		<dob>1905</dob>
+	</person>
+	<person>
+		<first>first</first>
+		<last>last</last>
+		<dob>date</dob>
+	</person>
+	<person>
+		<first>Ryan</first>
+		<last>Barrett</last>
+		<dob>5/12/1999</dob>
+	</person>
+</people>
