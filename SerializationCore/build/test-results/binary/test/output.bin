@@ -1,16 +1,0 @@
-getList
-	makeList
-
-getPerson
-getList
-	makeList
-
-getPerson
-
-	testEqualsDifferent
-
-testCompareToSame
-
-testEqualsSame
-
-testCompareToSame

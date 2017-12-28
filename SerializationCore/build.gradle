@@ -20,5 +20,6 @@ dependencies {
     //   parent.gradle.
     //
     compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
-    compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+    compile group: 'org.jdom', name: 'jdom', version: '2.0.0'
+
 }

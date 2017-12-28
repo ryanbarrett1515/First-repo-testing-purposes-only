@@ -16,7 +16,7 @@ import java.io.*;
 public class FileInputStuff {
     public static void main(String[] args){
         Scanner userInput = new Scanner(System.in);
-        ArrayList<Person> list = new ArrayList<>();
+        ArrayList<Person> list;
 
         try{
             FileInputStream fileReader = new FileInputStream("People/People.CSV");
@@ -30,7 +30,7 @@ public class FileInputStuff {
             getPeople(entry, userInput, list);
             makeList(list, "People/People.CSV");
         }catch(Exception e){
-            System.out.println("Something went wrong");
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 

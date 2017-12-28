@@ -5,43 +5,33 @@
  */
 package org.cirdles.fileinputstuff;
 
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import org.junit.Test;
-import java.io.FileInputStream;
 import static org.junit.Assert.*;
-
+import java.io.File;
+import java.util.ArrayList;
 /**
  *
  * @author RyanBarrett
  */
-public class BinarySerializationTest {
-    /**
-     * Test of getList method, of class FileInputStuff.
-     */
-    @Test
-    public void testGetList() {
+public class XMLSerializationTest {
+    
+    public void testGetList(){
         try {
             
             System.out.println("getList");
-            FileInputStream fis = new FileInputStream("BinaryTest/BinarySerializationTest");
-            ObjectInputStream ois = new ObjectInputStream(fis);
+            File inputFile = new File("XMLTest/peopleTest.xml");
             ArrayList<Person> expResult = new ArrayList<>();
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
-            ArrayList<Person> result = BinarySerialization.getList(ois);
+            ArrayList<Person> result = XMLSerialization.getList(inputFile);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
         }
     }
-
-    /**
-     * Test of makeList method, of class FileInputStuff.
-     */
-    @Test
-    public void testMakeList() throws Exception {
+    
+    public void testMakeList(){
         System.out.println("makeList");
         ArrayList<Person> expResult = BinarySerialization.getList(new ObjectInputStream(new FileInputStream("BinaryTest/BinarySerializationTest")));
         String name = "BinaryTest/BinarySerializationTest";
