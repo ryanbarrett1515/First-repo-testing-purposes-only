@@ -1,7 +1,5 @@
 package org.cirdles.fileinputstuff;
 
-import java.io.Serializable;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +9,9 @@ import java.io.Serializable;
  *
  * @author RyanBarrett
  */
+
+import java.io.Serializable;
+
 public class Person implements Comparable, Serializable {
 
     private String firstName;
@@ -47,7 +48,7 @@ public class Person implements Comparable, Serializable {
         DOB = d;
     }
 
-    public String toString() {
+    public String personToString() {
         return firstName + " " + lastName + " " + DOB;
     }
 
@@ -56,7 +57,7 @@ public class Person implements Comparable, Serializable {
         int returnValue = 0;
         if (!(o instanceof Person)) {
             returnValue = -1;
-        } else if (!(((Person) o).toString().equals(this.toString()))) {
+        } else if (!(((Person) o).personToString().equals(this.personToString()))) {
             returnValue = 1;
         }
         return returnValue;
@@ -67,7 +68,7 @@ public class Person implements Comparable, Serializable {
         boolean returnValue = true;
         if (!(o instanceof Person)) {
             returnValue = false;
-        } else if (!((Person) o).toString().equals(this.toString())){
+        } else if (!((Person) o).personToString().equals(this.personToString())) {
             returnValue = false;
         }
         return returnValue;

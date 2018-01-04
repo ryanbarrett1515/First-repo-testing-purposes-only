@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuff;
+package org.cirdles.fileinputstuffui;
 
 /**
  *
@@ -14,12 +14,12 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.IOException;
-import org.jdom2.Element;
-import org.jdom2.Document;
+import java.text.Format;
+import org.jdom2.element.Element;
+import org.cirdles.fileinputstuff.Person;
 import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.jdom2.Document;
 
 public class XMLSerialization {
 
@@ -31,12 +31,10 @@ public class XMLSerialization {
             list = getList(file);
             System.out.println("Current people on file: ");
             for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i));
+                System.out.println(list.get(i).personToString());
             }
             getPeople(scan, list);
             makeList(list, file);
-        } catch (IOException e) {
-            System.out.println("Something went wrong with io: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Something went wrong " + e.getMessage());
         }
@@ -50,12 +48,12 @@ public class XMLSerialization {
             Document doc = (Document) builder.build(file);
             Element root = doc.getRootElement();
             List nodes = root.getChildren("person");
-            for(int i = 0; i < nodes.size(); i++){
-                Element node = (Element)nodes.get(i);
+            for (int i = 0; i < nodes.size(); i++) {
+                Element node = (Element) nodes.get(i);
                 list.add(new Person(node.getChildText("first"), node.getChildText("last"), node.getChildText("dob")));
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong with doc stuff: ");
+            System.out.println("Something went wrong with doc stuff: " + e.getMessage());
         }
         return list;
     }
@@ -67,7 +65,7 @@ public class XMLSerialization {
         Document doc = (Document) builder.build(file);
         ArrayList<Person> current = getList(file);
         Element root = doc.getRootElement();
-        for(int i = list.size() - current.size(); i < list.size(); i++){
+        for (int i = list.size() - current.size(); i < list.size(); i++) {
             Element person = new Element("person");
             person.addContent(new Element("first").setText(list.get(i).getFirstName()));
             person.addContent(new Element("last").setText(list.get(i).getLastName()));
@@ -83,7 +81,7 @@ public class XMLSerialization {
         do {
             if (entry.equals("a")) {
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
+                    System.out.println(list.get(i).personToString());
                 }
             } else if (!entry.equals("")) {
                 list.add(getPerson(entry));

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuff;
+package org.cirdles.fileinputstuffui;
 
 import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
-import org.jdom2.Document;
-import org.jdom2.input.SAXBuilder;
+import org.cirdles.fileinputstuff.Person;
 
 /**
  *

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuff;
+package org.cirdles.fileinputstuffui;
 
 /**
  *
@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.cirdles.fileinputstuff.Person;
 
 public class BinarySerialization {
 
@@ -23,7 +24,7 @@ public class BinarySerialization {
         ArrayList<Person> list;
 
         try {
-            FileInputStream fileReader = new FileInputStream("Binary/BinarySerialization");
+            FileInputStream fileReader = new FileInputStream("Binary/BinarySerialization.ser");
             ObjectInputStream ois = new ObjectInputStream(fileReader);
             list = getList(ois);
             ois.close();
@@ -35,7 +36,7 @@ public class BinarySerialization {
             }
             String entry = "";
             getPeople(entry, userInput, list);
-            makeList(list, "Binary/BinarySerialization");
+            makeList(list, "Binary/BinarySerialization.ser");
         } catch (Exception e) {
             System.out.println("Something went wrong");
         }
@@ -61,6 +62,7 @@ public class BinarySerialization {
             oos.writeObject(list.get(i));
         }
         oos.close();
+        finalFile.close();
     }
 
     //gets more people from user
@@ -68,7 +70,7 @@ public class BinarySerialization {
         while (!entry.equals("q")) {
             if (entry.equals("a")) {
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
+                    System.out.println(list.get(i).personToString());
                 }
             } else if (!entry.equals("")) {
                 list.add(getPerson(entry));
