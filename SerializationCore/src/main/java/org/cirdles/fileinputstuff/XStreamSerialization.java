@@ -76,7 +76,7 @@ public class XStreamSerialization {
             System.out.println("or to  see current people on file enter a:");
             entry = userInput.nextLine();
         }
-    }
+    }  
 
     //creates a person from a line of code
     public static Person getPerson(String entry) {
