@@ -1,0 +1,23 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle/
+build/
+/Squid/.nb-gradle/
+
+# Netbeans
+nb-configuration.xml
+nbactions.xml
+dependency-reduced-pom.xml
+nbproject/
+.nb-gradle/
+.nb-gradle-properties
+private/
+
+# MACOS
+.DS_Store
