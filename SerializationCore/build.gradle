@@ -15,5 +15,4 @@ if (!hasProperty('mainClass')) {
 
 dependencies {
     compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
-
 }

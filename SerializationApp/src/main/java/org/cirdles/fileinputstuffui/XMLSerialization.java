@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.text.Format;
-import org.jdom2.element.Element;
 import org.cirdles.fileinputstuff.Person;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.Document;
+import org.jdom2.Element;
 
 public class XMLSerialization {
 
