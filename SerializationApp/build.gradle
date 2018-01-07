@@ -10,7 +10,7 @@
 // prefer. In this case NetBeans will not add these tasks but you may rely on
 // your own implementation.
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'org.cirdles.fileinputstuffui.XMLSerialization'
+    ext.mainClass = 'org.cirdles.fileinputstuffui.XMLSerializationUI'
 }
 
 dependencies {
@@ -19,7 +19,5 @@ dependencies {
     //   By default, only the Maven Central Repository is specified in
     //   parent.gradle.
     //
-    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
-    compile group: 'org.jdom', name: 'jdom', version: '2.0.0'
-
+    compile project(":SerializationCore")
 }

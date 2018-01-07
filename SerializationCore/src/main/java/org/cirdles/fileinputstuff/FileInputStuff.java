@@ -1,68 +1,40 @@
+package org.cirdles.fileinputstuff;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuffui;
-
 /**
  *
  * @author RyanBarrett
  */
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import org.cirdles.fileinputstuff.Person;
 
-public class BinarySerialization {
-
-    public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
-        ArrayList<Person> list;
-
-        try {
-            FileInputStream fileReader = new FileInputStream("Binary/BinarySerialization.ser");
-            ObjectInputStream ois = new ObjectInputStream(fileReader);
-            list = getList(ois);
-            ois.close();
-            fileReader.close();
-
-            System.out.println("Current people on file: ");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i));
-            }
-            String entry = "";
-            getPeople(entry, userInput, list);
-            makeList(list, "Binary/BinarySerialization.ser");
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-        }
-    }
+public class FileInputStuff {
 
     //returns list of persons
-    public static ArrayList<Person> getList(ObjectInputStream ois) throws Exception {
+    public static ArrayList<Person> getList(Scanner fileScanner) {
         ArrayList<Person> list = new ArrayList<>();
-        try {
-            while (true) {
-                list.add((Person) ois.readObject());
-            }
-        } catch (Exception e) {
-            return list;
+        while (fileScanner.hasNextLine()) {
+            list.add(getPerson(fileScanner.nextLine()));
         }
+        return list;
     }
 
     //makes list of persons on file
     public static void makeList(ArrayList<Person> list, String name) throws Exception {
         FileOutputStream finalFile = new FileOutputStream(name);
-        ObjectOutputStream oos = new ObjectOutputStream(finalFile);
+        PrintWriter fileWriter = new PrintWriter(finalFile);
         for (int i = 0; i < list.size(); i++) {
-            oos.writeObject(list.get(i));
+            fileWriter.println(list.get(i).getFirstName() + ", "
+                    + list.get(i).getLastName() + ", " + list.get(i).getDOB());
         }
-        oos.close();
-        finalFile.close();
+        fileWriter.close();
     }
 
     //gets more people from user

@@ -17,28 +17,8 @@ import java.util.Scanner;
  * @author RyanBarrett
  */
 public class XStreamSerialization {
-    
-    public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
-        ArrayList<Person> list;
 
-        try {
-            File file = new File("XStreamSerialization/XStreamSerialization.xml");
-            list = getList(file);
-
-            System.out.println("Current people on file: ");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i));
-            }
-            String entry = "";
-            getPeople(entry, userInput, list);
-            makeList(list, file);
-        } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }
-    
-    public static XStream getXStream(){
+    public static XStream getXStream() {
         XStream xstream = new XStream();
         xstream.aliasPackage("people", "java.util.ArrayList");
         xstream.alias("person", Person.class);
@@ -76,7 +56,7 @@ public class XStreamSerialization {
             System.out.println("or to  see current people on file enter a:");
             entry = userInput.nextLine();
         }
-    }  
+    }
 
     //creates a person from a line of code
     public static Person getPerson(String entry) {

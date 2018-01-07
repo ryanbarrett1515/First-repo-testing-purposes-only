@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuffui;
+package org.cirdles.fileinputstuff;
 
 /**
  *
@@ -14,32 +14,13 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.text.Format;
-import org.cirdles.fileinputstuff.Person;
+import org.jdom2.output.Format;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
 public class XMLSerialization {
-
-    public static void main(String[] args) {
-        ArrayList<Person> list;
-        Scanner scan = new Scanner(System.in);
-        try {
-            File file = new File("XML/people.xml");
-            list = getList(file);
-            System.out.println("Current people on file: ");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).personToString());
-            }
-            getPeople(scan, list);
-            makeList(list, file);
-        } catch (Exception e) {
-            System.out.println("Something went wrong " + e.getMessage());
-        }
-    }
-
     //returns list of persons
     public static ArrayList<Person> getList(File file) {
         ArrayList<Person> list = new ArrayList<>();

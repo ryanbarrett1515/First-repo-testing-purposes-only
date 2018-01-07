@@ -3,39 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cirdles.fileinputstuffui;
+package org.cirdles.fileinputstuff;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 import org.junit.Test;
 import java.io.FileInputStream;
-import org.cirdles.fileinputstuff.Person;
 import static org.junit.Assert.*;
 
 /**
  *
  * @author RyanBarrett
  */
-public class FileInputStuffTest {
+public class BinarySerializationTest {
     /**
      * Test of getList method, of class FileInputStuff.
      */
     @Test
     public void testGetList() {
         try {
+            
             System.out.println("getList");
-            Scanner fileScanner = new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV"));
+            FileInputStream fis = new FileInputStream("BinaryTest/BinarySerializationTest.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
             ArrayList<Person> expResult = new ArrayList<>();
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
-            ArrayList<Person> result = FileInputStuff.getList(fileScanner);
+            BinarySerialization.makeList(expResult, "BinaryTest/BinarySerializationTest.ser");
+            ArrayList<Person> result = BinarySerialization.getList(ois);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
         }
-
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
@@ -44,22 +44,10 @@ public class FileInputStuffTest {
     @Test
     public void testMakeList() throws Exception {
         System.out.println("makeList");
-        ArrayList<Person> expResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
-        String name = "PeopleTest/PeopleTest.CSV";
-        FileInputStuff.makeList(expResult, name);
-        ArrayList<Person> actualResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
+        String name = "BinaryTest/BinarySerializationTest.ser";
+        ArrayList<Person> expResult = BinarySerialization.getList(new ObjectInputStream(new FileInputStream(name)));
+        BinarySerialization.makeList(expResult, name);
+        ArrayList<Person> actualResult = BinarySerialization.getList(new ObjectInputStream(new FileInputStream(name)));
         assertEquals(actualResult, expResult);
-    }
-
-    /**
-     * Test of getPerson method, of class FileInputStuff.
-     */
-    @Test
-    public void testGetPerson() {
-        System.out.println("getPerson");
-        String entry = "Ryan, Barrett, 5/12/1999";
-        Person expResult = new Person("Ryan", "Barrett", "5/12/1999");
-        Person result = FileInputStuff.getPerson(entry);
-        assertEquals(expResult, result);
     }
 }
