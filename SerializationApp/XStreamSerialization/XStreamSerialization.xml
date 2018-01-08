@@ -1,23 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<people>
+<list>
   <person>
-    <first>Ryan</first>
-    <last>Barrett</last>
-    <dob>5/12/1999</dob>
+    <firstName>Ryan</firstName>
+    <lastName>Barrett</lastName>
+    <DOB>5/12/1999</DOB>
   </person>
   <person>
-    <first>alejandro</first>
-    <last>kunakow</last>
-    <dob>1/28/1994</dob>
+    <firstName>bryce</firstName>
+    <lastName>barrett</lastName>
+    <DOB>1997</DOB>
   </person>
-  <person>
-    <first>alejandro</first>
-    <last>kunakow</last>
-    <dob>1/28/1994</dob>
-  </person>
-  <person>
-    <first>first</first>
-    <last>last</last>
-    <dob>dob</dob>
-  </person>
-</people>
+</list>
