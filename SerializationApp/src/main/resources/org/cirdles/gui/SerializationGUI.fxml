@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="RootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.cirdles.gui.SerializationGUIController">
    <children>
-      <MenuButton fx:id="Menu" accessibleRole="MENU_BAR" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="165.0" text="Menu" textAlignment="CENTER" textFill="#942028" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-        <items>
-          <MenuItem fx:id="MenuItemDeserialize" mnemonicParsing="false" onAction="#DeserializeOnAction" text="Deserialize" />
-            <MenuItem fx:id="MenuItemShowCurrent" mnemonicParsing="false" onAction="#ShowCurrentOnAction" text="Show Current" />
-            <MenuItem fx:id="MenuItemSerialize" mnemonicParsing="false" onAction="#SerializeOnAction" text="Serialize" />
-        </items>
-         <font>
-            <Font name="Times New Roman" size="27.0" />
-         </font>
-         <effect>
-            <InnerShadow color="#a1723d" />
-         </effect>
-      </MenuButton>
-      <TextField fx:id="TextFieldPeople" alignment="TOP_LEFT" layoutX="179.0" layoutY="99.0" prefHeight="371.0" prefWidth="383.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="99.0" />
-      <TextField fx:id="FirstName" layoutX="190.0" layoutY="16.0" promptText="Enter First Name Here" />
-      <TextField fx:id="LastName" layoutX="188.0" layoutY="41.0" promptText="Enter Last Name Here" />
-      <TextField fx:id="Date" layoutX="188.0" layoutY="65.0" promptText="Enter Date Here" />
-      <Button fx:id="CreateNewPerson" layoutX="342.0" layoutY="6.0" mnemonicParsing="false" onAction="#CreateNewPersonOnAction" prefHeight="85.0" prefWidth="132.0" text="Create New Person" />
+      <TextField fx:id="FirstName" layoutX="14.0" layoutY="152.0" promptText="Enter First Name Here" />
+      <TextField fx:id="LastName" layoutX="14.0" layoutY="178.0" promptText="Enter Last Name Here" />
+      <TextField fx:id="Date" layoutX="14.0" layoutY="204.0" prefHeight="26.0" prefWidth="152.0" promptText="Enter Date Here" />
+      <Button fx:id="CreateNewPerson" layoutX="15.0" layoutY="67.0" mnemonicParsing="false" onAction="#CreateNewPersonOnAction" prefHeight="85.0" prefWidth="152.0" text="Create New Person" />
+      <MenuBar fx:id="MainMenuBar" layoutX="15.0" layoutY="14.0" prefHeight="26.0" prefWidth="479.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu fx:id="SerializeMenu" mnemonicParsing="false" text="Serialize">
+              <items>
+                  <MenuItem fx:id="CSVSerialize" mnemonicParsing="false" onAction="#CSVSerialize" text="CSV" />
+                <MenuItem fx:id="BinarySerialize" mnemonicParsing="false" onAction="#BinarySerialize" text="Binary" />
+                  <MenuItem fx:id="JDOMSerialize" mnemonicParsing="false" onAction="#JDOMSerialize" text="JDOM" />
+                  <MenuItem fx:id="XStreamSerialize" mnemonicParsing="false" onAction="#XStreamSerialize" text="XStream" />
+              </items>
+            </Menu>
+            <Menu fx:id="DeserializeMenu" mnemonicParsing="false" text="Deserialize">
+              <items>
+                <MenuItem fx:id="CSVDeserialize" mnemonicParsing="false" onAction="#CSVDeserialize" text="CSV" />
+                  <MenuItem fx:id="BInaryDeserialize" mnemonicParsing="false" onAction="#BinaryDeserialize" text="Binary" />
+                  <MenuItem fx:id="JDOMDeserialize" mnemonicParsing="false" onAction="#JDOMDeserialize" text="JDOM" />
+                  <MenuItem fx:id="XStreamDeserialize" mnemonicParsing="false" onAction="#XStreamDeserialize" text="XStream" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button fx:id="ClearButton" layoutX="15.0" layoutY="334.0" mnemonicParsing="false" onAction="#ClearOnAction" prefHeight="73.0" prefWidth="152.0" text="Clear" />
+      <TextArea fx:id="TextAreaPeople" layoutX="174.0" layoutY="66.0" prefHeight="408.0" prefWidth="285.0" />
    </children>
 </AnchorPane>
