@@ -16,7 +16,8 @@ import org.cirdles.fileinputstuff.XMLSerialization;
  * @author RyanBarrett
  */
 public class XMLSerializationUI {
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
         ArrayList<Person> list;
         Scanner scan = new Scanner(System.in);
         try {
