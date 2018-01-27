@@ -22,7 +22,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import org.cirdles.fileinputstuff.BinarySerialization;
 import org.cirdles.fileinputstuff.FileInputStuff;
 import org.cirdles.fileinputstuff.Person;
@@ -75,16 +76,21 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private Button ShowCurrent;
 
-    private FileChooser fc = new FileChooser();
+    JButton open = new JButton();
+    private JFileChooser fc = new JFileChooser();
     private ArrayList<Person> list = new ArrayList<>();
     private String text = "";
+    @FXML
+    private Button ResetPeople;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        fc.setCurrentDirectory(new File("."));
+        fc.setDialogTitle("Select Directory");
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     }
 
     @FXML
@@ -99,7 +105,8 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void CSVSerialize(ActionEvent event) {
         try {
-            FileInputStuff.makeList(list, "People/People.CSV");
+            fc.showOpenDialog(open);
+            FileInputStuff.makeList(list, fc.getSelectedFile().toString());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nCSVSerialize went wrong.");
         }
@@ -108,7 +115,8 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void BinarySerialize(ActionEvent event) {
         try {
-            BinarySerialization.makeList(list, "Binary/BinarySerialization.ser");
+            fc.showOpenDialog(open);
+            BinarySerialization.makeList(list, fc.getSelectedFile().toString());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nBinarySerialize went wrong");
         }
@@ -117,8 +125,8 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void JDOMSerialize(ActionEvent event) {
         try {
-            File file = new File("XML/people.xml");
-            XMLSerialization.makeList(list, file);
+            fc.showOpenDialog(open);
+            XMLSerialization.makeList(list, fc.getSelectedFile());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nJDOMSerialize went wrong.");
         }
@@ -127,8 +135,8 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void XStreamSerialize(ActionEvent event) {
         try {
-            File file = new File("XStreamSerialization/XStreamSerialization.xml");
-            XStreamSerialization.makeList(list, file);
+            fc.showOpenDialog(open);
+            XStreamSerialization.makeList(list, fc.getSelectedFile());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nXStreamSerialize went wrong.");
         }
@@ -139,7 +147,8 @@ public class SerializationGUIController implements Initializable {
         ArrayList<Person> csvList = new ArrayList<Person>();
 
         try {
-            FileInputStream fileReader = new FileInputStream("People/People.CSV");
+            fc.showOpenDialog(open);
+            FileInputStream fileReader = new FileInputStream(fc.getSelectedFile().toString());
             Scanner fileScanner = new Scanner(fileReader);
             csvList = FileInputStuff.getList(fileScanner);
         } catch (Exception e) {
@@ -154,8 +163,8 @@ public class SerializationGUIController implements Initializable {
     private void XStreamDeserialize(ActionEvent event) {
         ArrayList<Person> xList = new ArrayList<>();
         try {
-            File file = new File("XStreamSerialization/XStreamSerialization.xml");
-            xList = XStreamSerialization.getList(file);
+            fc.showOpenDialog(open);
+            xList = XStreamSerialization.getList(fc.getSelectedFile());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nXStream Deserialize went wrong.");
         }
@@ -169,7 +178,8 @@ public class SerializationGUIController implements Initializable {
         ArrayList<Person> bList = new ArrayList<>();
 
         try {
-            FileInputStream fileReader = new FileInputStream("Binary/BinarySerialization.ser");
+            fc.showOpenDialog(open);
+            FileInputStream fileReader = new FileInputStream(fc.getSelectedFile().toString());
             ObjectInputStream ois = new ObjectInputStream(fileReader);
             bList = BinarySerialization.getList(ois);
             ois.close();
@@ -187,8 +197,8 @@ public class SerializationGUIController implements Initializable {
         ArrayList<Person> jList = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         try {
-            File file = new File("XML/people.xml");
-            jList = XMLSerialization.getList(file);
+            fc.showOpenDialog(open);
+            jList = XMLSerialization.getList(fc.getSelectedFile());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nJDOMDeserialize went wrong.");
         }
@@ -207,5 +217,10 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void ClearOnAction(ActionEvent event) {
         TextAreaPeople.setText("");
+    }
+
+    @FXML
+    private void ResetPeople(ActionEvent event) {
+        list = new ArrayList<>();
     }
 }
