@@ -22,8 +22,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.cirdles.fileinputstuff.BinarySerialization;
 import org.cirdles.fileinputstuff.FileInputStuff;
 import org.cirdles.fileinputstuff.Person;
@@ -74,83 +74,91 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private MenuItem BinaryDeserialize;
     @FXML
-    private Button ShowCurrent;
+    private Button ShowCurrentButton;
+    @FXML
+    private Button ResetPeopleButton;
 
-    JButton open = new JButton();
-    private JFileChooser fc = new JFileChooser();
+    private Button open = new Button();
+    private FileChooser fc = new FileChooser();
     private ArrayList<Person> list = new ArrayList<>();
     private String text = "";
-    @FXML
-    private Button ResetPeople;
+
+    private FileChooser.ExtensionFilter BinaryExtension = new FileChooser.ExtensionFilter("Binary Serialization (.SER)", "*.SER");
+    private FileChooser.ExtensionFilter CSVExtension = new FileChooser.ExtensionFilter("CSV Serialization (.CSV", "*.CSV");
+    private FileChooser.ExtensionFilter XMLExtension = new FileChooser.ExtensionFilter("XML Serialization (.xml", "*.xml");
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fc.setCurrentDirectory(new File("."));
-        fc.setDialogTitle("Select Directory");
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setTitle("Choose a File");
+        fc.setInitialDirectory(new File("./SerializationApp"));
     }
 
     @FXML
     private void CreateNewPersonOnAction(ActionEvent event) {
-        list.add(new Person(FirstName.getText(), LastName.getText(), Date.getText()));
-        FirstName.clear();
-        LastName.clear();
-        Date.clear();
-        TextAreaPeople.appendText("\n" + list.get(list.size() - 1).personToString());
+        if (!FirstName.getText().equals("") && !LastName.getText().equals("") && !Date.getText().equals("")) {
+            list.add(new Person(FirstName.getText(), LastName.getText(), Date.getText()));
+            FirstName.clear();
+            LastName.clear();
+            Date.clear();
+            TextAreaPeople.appendText("\n" + list.get(list.size() - 1).personToString());
+        } else {
+            TextAreaPeople.appendText("\nPlease Complete All Fields.");
+        }
     }
 
     @FXML
-    private void CSVSerialize(ActionEvent event) {
+    private void CSVSerializeAction(ActionEvent event) {
         try {
-            fc.showOpenDialog(open);
-            FileInputStuff.makeList(list, fc.getSelectedFile().toString());
+            fc.setSelectedExtensionFilter(XMLExtension);
+            FileInputStuff.makeList(list, fc.showSaveDialog(new Stage()).toString());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nCSVSerialize went wrong.");
         }
     }
 
     @FXML
-    private void BinarySerialize(ActionEvent event) {
+    private void BinarySerializeAction(ActionEvent event) {
         try {
-            fc.showOpenDialog(open);
-            BinarySerialization.makeList(list, fc.getSelectedFile().toString());
+            fc.setSelectedExtensionFilter(BinaryExtension);
+            BinarySerialization.makeList(list, fc.showSaveDialog(new Stage()).toString());
         } catch (Exception e) {
             TextAreaPeople.appendText("\nBinarySerialize went wrong");
         }
     }
 
     @FXML
-    private void JDOMSerialize(ActionEvent event) {
+    private void JDOMSerializeAction(ActionEvent event) {
         try {
-            fc.showOpenDialog(open);
-            XMLSerialization.makeList(list, fc.getSelectedFile());
+            fc.setSelectedExtensionFilter(XMLExtension);
+            XMLSerialization.makeList(list, fc.showSaveDialog(new Stage()));
         } catch (Exception e) {
             TextAreaPeople.appendText("\nJDOMSerialize went wrong.");
         }
     }
 
     @FXML
-    private void XStreamSerialize(ActionEvent event) {
+    private void XStreamSerializeAction(ActionEvent event) {
         try {
-            fc.showOpenDialog(open);
-            XStreamSerialization.makeList(list, fc.getSelectedFile());
+            fc.setSelectedExtensionFilter(XMLExtension);
+            XStreamSerialization.makeList(list, fc.showSaveDialog(new Stage()));
         } catch (Exception e) {
             TextAreaPeople.appendText("\nXStreamSerialize went wrong.");
         }
     }
 
     @FXML
-    private void CSVDeserialize(ActionEvent event) {
+    private void CSVDeserializeAction(ActionEvent event) {
         ArrayList<Person> csvList = new ArrayList<Person>();
 
         try {
-            fc.showOpenDialog(open);
-            FileInputStream fileReader = new FileInputStream(fc.getSelectedFile().toString());
+            fc.setSelectedExtensionFilter(CSVExtension);
+            FileInputStream fileReader = new FileInputStream(fc.showOpenDialog(new Stage()).toString());
             Scanner fileScanner = new Scanner(fileReader);
             csvList = FileInputStuff.getList(fileScanner);
+            ShowCurrent(event);
         } catch (Exception e) {
             TextAreaPeople.appendText("\nCSVDeserialize went wrong.");
         }
@@ -160,11 +168,12 @@ public class SerializationGUIController implements Initializable {
     }
 
     @FXML
-    private void XStreamDeserialize(ActionEvent event) {
+    private void XStreamDeserializeAction(ActionEvent event) {
         ArrayList<Person> xList = new ArrayList<>();
         try {
-            fc.showOpenDialog(open);
-            xList = XStreamSerialization.getList(fc.getSelectedFile());
+            fc.setSelectedExtensionFilter(XMLExtension);
+            xList = XStreamSerialization.getList(fc.showOpenDialog(new Stage()));
+            ShowCurrent(event);
         } catch (Exception e) {
             TextAreaPeople.appendText("\nXStream Deserialize went wrong.");
         }
@@ -174,16 +183,17 @@ public class SerializationGUIController implements Initializable {
     }
 
     @FXML
-    private void BinaryDeserialize(ActionEvent event) {
+    private void BinaryDeserializeAction(ActionEvent event) {
         ArrayList<Person> bList = new ArrayList<>();
 
         try {
-            fc.showOpenDialog(open);
-            FileInputStream fileReader = new FileInputStream(fc.getSelectedFile().toString());
+            fc.setSelectedExtensionFilter(BinaryExtension);
+            FileInputStream fileReader = new FileInputStream(fc.showOpenDialog(new Stage()).toString());
             ObjectInputStream ois = new ObjectInputStream(fileReader);
             bList = BinarySerialization.getList(ois);
             ois.close();
             fileReader.close();
+            ShowCurrent(event);
         } catch (Exception e) {
             TextAreaPeople.appendText("\nBinaryDeserialize went wrong.");
         }
@@ -193,12 +203,13 @@ public class SerializationGUIController implements Initializable {
     }
 
     @FXML
-    private void JDOMDeserialize(ActionEvent event) {
+    private void JDOMDeserializeAction(ActionEvent event) {
         ArrayList<Person> jList = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         try {
-            fc.showOpenDialog(open);
-            jList = XMLSerialization.getList(fc.getSelectedFile());
+            fc.setSelectedExtensionFilter(XMLExtension);
+            jList = XMLSerialization.getList(fc.showOpenDialog(new Stage()));
+            ShowCurrent(event);
         } catch (Exception e) {
             TextAreaPeople.appendText("\nJDOMDeserialize went wrong.");
         }
@@ -209,6 +220,7 @@ public class SerializationGUIController implements Initializable {
 
     @FXML
     private void ShowCurrent(ActionEvent event) {
+        ClearOnAction(event);
         for (int i = 0; i < list.size(); i++) {
             TextAreaPeople.appendText("\n" + list.get(i).personToString());
         }
@@ -222,5 +234,6 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private void ResetPeople(ActionEvent event) {
         list = new ArrayList<>();
+        ClearOnAction(event);
     }
 }

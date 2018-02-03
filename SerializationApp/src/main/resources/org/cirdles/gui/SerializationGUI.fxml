@@ -18,25 +18,25 @@
          <menus>
             <Menu fx:id="SerializeMenu" mnemonicParsing="false" text="Serialize">
               <items>
-                  <MenuItem fx:id="CSVSerialize" mnemonicParsing="false" onAction="#CSVSerialize" text="CSV" />
-                <MenuItem fx:id="BinarySerialize" mnemonicParsing="false" onAction="#BinarySerialize" text="Binary" />
-                  <MenuItem fx:id="JDOMSerialize" mnemonicParsing="false" onAction="#JDOMSerialize" text="JDOM" />
-                  <MenuItem fx:id="XStreamSerialize" mnemonicParsing="false" onAction="#XStreamSerialize" text="XStream" />
+                  <MenuItem fx:id="CSVSerialize" mnemonicParsing="false" onAction="#CSVSerializeAction" text="CSV" />
+                <MenuItem fx:id="BinarySerialize" mnemonicParsing="false" onAction="#BinarySerializeAction" text="Binary" />
+                  <MenuItem fx:id="JDOMSerialize" mnemonicParsing="false" onAction="#JDOMSerializeAction" text="JDOM" />
+                  <MenuItem fx:id="XStreamSerialize" mnemonicParsing="false" onAction="#XStreamSerializeAction" text="XStream" />
               </items>
             </Menu>
             <Menu fx:id="DeserializeMenu" mnemonicParsing="false" text="Deserialize">
               <items>
-                <MenuItem fx:id="CSVDeserialize" mnemonicParsing="false" onAction="#CSVDeserialize" text="CSV" />
-                  <MenuItem fx:id="BinaryDeserialize" mnemonicParsing="false" onAction="#BinaryDeserialize" text="Binary" />
-                  <MenuItem fx:id="JDOMDeserialize" mnemonicParsing="false" onAction="#JDOMDeserialize" text="JDOM" />
-                  <MenuItem fx:id="XStreamDeserialize" mnemonicParsing="false" onAction="#XStreamDeserialize" text="XStream" />
+                <MenuItem fx:id="CSVDeserialize" mnemonicParsing="false" onAction="#CSVDeserializeAction" text="CSV" />
+                  <MenuItem fx:id="BinaryDeserialize" mnemonicParsing="false" onAction="#BinaryDeserializeAction" text="Binary" />
+                  <MenuItem fx:id="JDOMDeserialize" mnemonicParsing="false" onAction="#JDOMDeserializeAction" text="JDOM" />
+                  <MenuItem fx:id="XStreamDeserialize" mnemonicParsing="false" onAction="#XStreamDeserializeAction" text="XStream" />
               </items>
             </Menu>
          </menus>
       </MenuBar>
       <Button fx:id="ClearButton" layoutX="15.0" layoutY="334.0" mnemonicParsing="false" onAction="#ClearOnAction" prefHeight="73.0" prefWidth="152.0" text="Clear" AnchorPane.leftAnchor="17.0" />
       <TextArea fx:id="TextAreaPeople" layoutX="174.0" layoutY="66.0" prefHeight="408.0" prefWidth="285.0" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="ShowCurrent" layoutX="17.0" layoutY="246.0" mnemonicParsing="false" onAction="#ShowCurrent" prefHeight="56.0" prefWidth="152.0" text="Show Current" AnchorPane.leftAnchor="17.0" />
-      <Button fx:id="ResetPeople" layoutX="18.0" layoutY="415.0" mnemonicParsing="false" onAction="#ResetPeople" prefHeight="46.0" prefWidth="152.0" text="Reset Current People" AnchorPane.leftAnchor="18.0" />
+      <Button fx:id="ShowCurrentButton" layoutX="17.0" layoutY="246.0" mnemonicParsing="false" onAction="#ShowCurrent" prefHeight="56.0" prefWidth="152.0" text="Show Current" AnchorPane.leftAnchor="17.0" />
+      <Button fx:id="ResetPeopleButton" layoutX="18.0" layoutY="415.0" mnemonicParsing="false" onAction="#ResetPeople" prefHeight="46.0" prefWidth="152.0" text="Reset Current People" AnchorPane.leftAnchor="18.0" />
    </children>
 </AnchorPane>
