@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 4, 2018, 7:17:44 PM
+    Author     : RyanBarrett
+*/
+
+.menu-bar {
+    -fx-background-color:darkorange
+    
+}
+
+.root{
+    -fx-background-color:gainsboro
+}
+
+
+.button{
+    -fx-background-color:firebrick
+}
+
+.content{
+    -fx-background-color:white
+}
+
+.text{
+    -fx-font-size:16px;
+    -fx-font-family:"Times New Roman";
+}

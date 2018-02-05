@@ -26,12 +26,13 @@ public class SerializationMain extends Application {
         Parent root = new AnchorPane();
         Scene scene = new Scene(root, 498, 480);
         primaryStage.setScene(scene);
-        
+
         primaryStage.setOnCloseRequest((WindowEvent e) -> {
             Platform.exit();
             System.exit(0);
         });
 
+        scene.getStylesheets().add(this.getClass().getResource("SerializationGUIStyle.css").toExternalForm());
         scene.setRoot(FXMLLoader.load(getClass().getResource("SerializationGUI.fxml")));
 
         primaryStage.show();
