@@ -28,7 +28,8 @@ public class XMLSerialization {
             SAXBuilder builder = new SAXBuilder();
             Document doc = (Document) builder.build(file);
             Element root = doc.getRootElement();
-            List nodes = root.getChildren("person");
+            Element base = root.getChild("list");
+            List nodes = base.getChildren("person");
             for (int i = 0; i < nodes.size(); i++) {
                 Element node = (Element) nodes.get(i);
                 list.add(new Person(node.getChildText("first"), node.getChildText("last"), node.getChildText("dob")));
@@ -46,12 +47,13 @@ public class XMLSerialization {
         Document doc = (Document) builder.build(file);
         People current = getList(file);
         Element root = doc.getRootElement();
+        Element base = root.getChild("list");
         for (int i = list.size() - current.size(); i < list.size(); i++) {
             Element person = new Element("person");
             person.addContent(new Element("first").setText(list.get(i).getFirstName()));
             person.addContent(new Element("last").setText(list.get(i).getLastName()));
             person.addContent(new Element("dob").setText(list.get(i).getDOB()));
-            root.addContent(person);
+            base.addContent(person);
         }
         outputter.output(doc, new FileWriter(file));
     }

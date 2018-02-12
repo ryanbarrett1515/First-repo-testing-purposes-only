@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <people>
+<list>
   <person>
     <first>Ryan</first>
     <last>Barrett</last>
@@ -159,5 +160,6 @@
     <first>Bryce</first>
     <last>Barrett</last>
     <dob>1997</dob>
-  </person>
+ </person>
+</list>
 </people>

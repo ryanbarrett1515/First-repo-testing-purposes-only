@@ -20,6 +20,7 @@ public class People {
     }
 
     public People() {
+        people = new ArrayList<>();
     }
 
     public void add(Person p) {

@@ -1,17 +1,19 @@
-<list>
-  <person>
-    <firstName>Mike</firstName>
-    <lastName>Tyson</lastName>
-    <DOB>1905</DOB>
-  </person>
-  <person>
-    <firstName>first</firstName>
-    <lastName>last</lastName>
-    <DOB>date</DOB>
-  </person>
-  <person>
-    <firstName>Ryan</firstName>
-    <lastName>Barrett</lastName>
-    <DOB>5/12/1999</DOB>
-  </person>
-</list>
+<people>
+  <people>
+    <person>
+      <firstName>Mike</firstName>
+      <lastName>Tyson</lastName>
+      <DOB>1905</DOB>
+    </person>
+    <person>
+      <firstName>first</firstName>
+      <lastName>last</lastName>
+      <DOB>date</DOB>
+    </person>
+    <person>
+      <firstName>Ryan</firstName>
+      <lastName>Barrett</lastName>
+      <DOB>5/12/1999</DOB>
+    </person>
+  </people>
+</people>
