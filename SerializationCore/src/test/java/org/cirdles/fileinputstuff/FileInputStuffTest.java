@@ -28,7 +28,7 @@ public class FileInputStuffTest {
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
-            ArrayList<Person> result = FileInputStuff.getList(fileScanner);
+            People result = FileInputStuff.getList(fileScanner);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
@@ -43,10 +43,10 @@ public class FileInputStuffTest {
     @Test
     public void testMakeList() throws Exception {
         System.out.println("makeList");
-        ArrayList<Person> expResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
+        People expResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
         String name = "PeopleTest/PeopleTest.CSV";
         FileInputStuff.makeList(expResult, name);
-        ArrayList<Person> actualResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
+        People actualResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
         assertEquals(actualResult, expResult);
     }
 

@@ -22,8 +22,8 @@ import org.jdom2.Element;
 
 public class XMLSerialization {
     //returns list of persons
-    public static ArrayList<Person> getList(File file) {
-        ArrayList<Person> list = new ArrayList<>();
+    public static People getList(File file) {
+        People list = new People();
         try {
             SAXBuilder builder = new SAXBuilder();
             Document doc = (Document) builder.build(file);
@@ -40,11 +40,11 @@ public class XMLSerialization {
     }
 
     //makes list of persons on file
-    public static void makeList(ArrayList<Person> list, File file) throws Exception {
+    public static void makeList(People list, File file) throws Exception {
         XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
         SAXBuilder builder = new SAXBuilder();
         Document doc = (Document) builder.build(file);
-        ArrayList<Person> current = getList(file);
+        People current = getList(file);
         Element root = doc.getRootElement();
         for (int i = list.size() - current.size(); i < list.size(); i++) {
             Element person = new Element("person");
@@ -57,7 +57,7 @@ public class XMLSerialization {
     }
 
     //gets more people from user
-    public static void getPeople(Scanner userInput, ArrayList<Person> list) {
+    public static void getPeople(Scanner userInput, People list) {
         String entry = "";
         do {
             if (entry.equals("a")) {

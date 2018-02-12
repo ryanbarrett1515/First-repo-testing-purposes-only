@@ -6,10 +6,9 @@
 package org.cirdles.fileinputstuffui;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
-import org.cirdles.fileinputstuff.Person;
 import org.cirdles.fileinputstuff.FileInputStuff;
+import org.cirdles.fileinputstuff.People;
 /**
  *
  * @author RyanBarrett
@@ -17,7 +16,7 @@ import org.cirdles.fileinputstuff.FileInputStuff;
 public class CSVSerializationUI {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        ArrayList<Person> list;
+        People list;
 
         try {
             FileInputStream fileReader = new FileInputStream("People/People.CSV");

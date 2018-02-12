@@ -7,7 +7,7 @@ package org.cirdles.fileinputstuff;
 
 import static org.junit.Assert.*;
 import java.io.File;
-import java.util.ArrayList;
+import org.junit.Test;
 
 /**
  *
@@ -15,29 +15,31 @@ import java.util.ArrayList;
  */
 public class XMLSerializationTest {
 
+    @Test
     public void testGetList() {
         try {
 
             System.out.println("getList");
             File file = new File("XMLTest/peopleTest.xml");
-            ArrayList<Person> expResult = new ArrayList<>();
+            People expResult = new People();
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
-            ArrayList<Person> result = XMLSerialization.getList(file);
+            People result = XMLSerialization.getList(file);
             assertEquals(expResult, result);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
         }
     }
 
+    @Test
     public void testMakeList() {
         try {
             File file = new File("XMLTest/peopleTest.xml");
             System.out.println("makeList");
-            ArrayList<Person> expResult = XMLSerialization.getList(file);
+            People expResult = XMLSerialization.getList(file);
             XMLSerialization.makeList(expResult, file);
-            ArrayList<Person> actualResult = XMLSerialization.getList(file);
+            People actualResult = XMLSerialization.getList(file);
             assertEquals(actualResult, expResult);
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());

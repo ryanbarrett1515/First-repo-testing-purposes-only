@@ -9,4 +9,14 @@
     <lastName>barrett</lastName>
     <DOB>1997</DOB>
   </person>
+  <person>
+    <firstName>carter</firstName>
+    <lastName>smith</lastName>
+    <DOB>1987</DOB>
+  </person>
+  <person>
+    <firstName>jake</firstName>
+    <lastName>reynolds</lastName>
+    <DOB>1877</DOB>
+  </person>
 </list>

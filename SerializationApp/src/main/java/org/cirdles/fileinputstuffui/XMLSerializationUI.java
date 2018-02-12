@@ -6,9 +6,8 @@
 package org.cirdles.fileinputstuffui;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
-import org.cirdles.fileinputstuff.Person;
+import org.cirdles.fileinputstuff.People;
 import org.cirdles.fileinputstuff.XMLSerialization;
 
 /**
@@ -18,7 +17,7 @@ import org.cirdles.fileinputstuff.XMLSerialization;
 public class XMLSerializationUI {
 
     public static void main(String[] args) {
-        ArrayList<Person> list;
+        People list;
         Scanner scan = new Scanner(System.in);
         try {
             File file = new File("XML/people.xml");

@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
@@ -26,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.cirdles.fileinputstuff.BinarySerialization;
 import org.cirdles.fileinputstuff.FileInputStuff;
+import org.cirdles.fileinputstuff.People;
 import org.cirdles.fileinputstuff.Person;
 import org.cirdles.fileinputstuff.XMLSerialization;
 import org.cirdles.fileinputstuff.XStreamSerialization;
@@ -78,10 +78,9 @@ public class SerializationGUIController implements Initializable {
     @FXML
     private Button ResetPeopleButton;
 
-    private Button open = new Button();
-    private FileChooser fc = new FileChooser();
-    private ArrayList<Person> list = new ArrayList<>();
-    private String text = "";
+    private FileChooser fc;
+    private People list;
+    private String text;
 
     private FileChooser.ExtensionFilter BinaryExtension = new FileChooser.ExtensionFilter("Binary Serialization (.SER)", "*.SER");
     private FileChooser.ExtensionFilter CSVExtension = new FileChooser.ExtensionFilter("CSV Serialization (.CSV", "*.CSV");
@@ -92,8 +91,36 @@ public class SerializationGUIController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fc = new FileChooser();
+        text = "";
+        list = new People();
         fc.setTitle("Choose a File");
-        fc.setInitialDirectory(new File("./SerializationApp"));
+        File initialDirectory = new File(".");
+        fc.setInitialDirectory(initialDirectory);
+        setStyles();
+    }
+    
+    private void setStyles(){
+        String buttonFont = "-fx-font-size: 16; -fx-font-family: \"Times New Roman\"";
+        String menuBarFont = "-fx-font-size: 20; -fx-font-family: \"Times New Roman\"; -fx-font-weight: bold";
+        String menuItemFont = "-fx-font-size: 18; -fx-font-family: \"Times New Roman\"";
+        String resetButtonStyle = "-fx-font-size: 12; -fx-font-family: \"Times New Roman\"; -fx-background-color: yellow";
+        
+        MainMenuBar.setStyle(menuBarFont);
+        ShowCurrentButton.setStyle(buttonFont);
+        CreateNewPerson.setStyle(buttonFont);
+        ClearButton.setStyle(buttonFont);
+        ResetPeopleButton.setStyle(buttonFont);
+        ResetPeopleButton.setStyle(resetButtonStyle);
+        TextAreaPeople.setStyle(buttonFont);
+        CSVSerialize.setStyle(menuItemFont);
+        BinarySerialize.setStyle(menuItemFont);
+        JDOMSerialize.setStyle(menuItemFont);
+        XStreamSerialize.setStyle(menuItemFont);
+        CSVDeserialize.setStyle(menuItemFont);
+        BinaryDeserialize.setStyle(menuItemFont);
+        JDOMDeserialize.setStyle(menuItemFont);
+        XStreamDeserialize.setStyle(menuItemFont);
     }
 
     @FXML
@@ -113,10 +140,13 @@ public class SerializationGUIController implements Initializable {
     private void CSVSerializeAction(ActionEvent event) {
         try {
             fc.setSelectedExtensionFilter(XMLExtension);
-            FileInputStuff.makeList(list, fc.showSaveDialog(new Stage()).toString());
+            String fileName = fc.showSaveDialog(new Stage()).toString();
+            FileInputStuff.makeList(list, fileName);
         } catch (Exception e) {
             TextAreaPeople.appendText("\nCSVSerialize went wrong.");
+            System.out.println(e.getMessage());
         }
+
     }
 
     @FXML
@@ -151,7 +181,7 @@ public class SerializationGUIController implements Initializable {
 
     @FXML
     private void CSVDeserializeAction(ActionEvent event) {
-        ArrayList<Person> csvList = new ArrayList<Person>();
+        People csvList = new People();
 
         try {
             fc.setSelectedExtensionFilter(CSVExtension);
@@ -165,11 +195,12 @@ public class SerializationGUIController implements Initializable {
         for (int i = 0; i < csvList.size(); i++) {
             list.add(csvList.get(i));
         }
+        ShowCurrent(event);
     }
 
     @FXML
     private void XStreamDeserializeAction(ActionEvent event) {
-        ArrayList<Person> xList = new ArrayList<>();
+        People xList = new People();
         try {
             fc.setSelectedExtensionFilter(XMLExtension);
             xList = XStreamSerialization.getList(fc.showOpenDialog(new Stage()));
@@ -180,11 +211,12 @@ public class SerializationGUIController implements Initializable {
         for (int i = 0; i < xList.size(); i++) {
             list.add(xList.get(i));
         }
+        ShowCurrent(event);
     }
 
     @FXML
     private void BinaryDeserializeAction(ActionEvent event) {
-        ArrayList<Person> bList = new ArrayList<>();
+        People bList = new People();
 
         try {
             fc.setSelectedExtensionFilter(BinaryExtension);
@@ -200,11 +232,12 @@ public class SerializationGUIController implements Initializable {
         for (int i = 0; i < bList.size(); i++) {
             list.add(bList.get(i));
         }
+        ShowCurrent(event);
     }
 
     @FXML
     private void JDOMDeserializeAction(ActionEvent event) {
-        ArrayList<Person> jList = new ArrayList<>();
+        People jList = new People();
         Scanner scan = new Scanner(System.in);
         try {
             fc.setSelectedExtensionFilter(XMLExtension);
@@ -216,6 +249,7 @@ public class SerializationGUIController implements Initializable {
         for (int i = 0; i < jList.size(); i++) {
             list.add(jList.get(i));
         }
+        ShowCurrent(event);
     }
 
     @FXML
@@ -233,7 +267,7 @@ public class SerializationGUIController implements Initializable {
 
     @FXML
     private void ResetPeople(ActionEvent event) {
-        list = new ArrayList<>();
+        list = new People();
         ClearOnAction(event);
     }
 }

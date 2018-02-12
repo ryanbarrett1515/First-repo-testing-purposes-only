@@ -12,14 +12,13 @@ package org.cirdles.fileinputstuff;
  */
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileInputStuff {
 
     //returns list of persons
-    public static ArrayList<Person> getList(Scanner fileScanner) {
-        ArrayList<Person> list = new ArrayList<>();
+    public static People getList(Scanner fileScanner) {
+        People list = new People();
         while (fileScanner.hasNextLine()) {
             list.add(getPerson(fileScanner.nextLine()));
         }
@@ -27,18 +26,18 @@ public class FileInputStuff {
     }
 
     //makes list of persons on file
-    public static void makeList(ArrayList<Person> list, String name) throws Exception {
+    public static void makeList(People list, String name) throws Exception {
         FileOutputStream finalFile = new FileOutputStream(name);
-        PrintWriter fileWriter = new PrintWriter(finalFile);
-        for (int i = 0; i < list.size(); i++) {
-            fileWriter.println(list.get(i).getFirstName() + ", "
-                    + list.get(i).getLastName() + ", " + list.get(i).getDOB());
+        try (PrintWriter fileWriter = new PrintWriter(finalFile)) {
+            for (int i = 0; i < list.size(); i++) {
+                fileWriter.println(list.get(i).getFirstName() + ", "
+                        + list.get(i).getLastName() + ", " + list.get(i).getDOB());
+            }
         }
-        fileWriter.close();
     }
 
     //gets more people from user
-    public static void getPeople(String entry, Scanner userInput, ArrayList<Person> list) {
+    public static void getPeople(String entry, Scanner userInput, People list) {
         while (!entry.equals("q")) {
             if (entry.equals("a")) {
                 for (int i = 0; i < list.size(); i++) {

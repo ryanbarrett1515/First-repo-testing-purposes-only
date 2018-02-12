@@ -7,10 +7,9 @@ package org.cirdles.fileinputstuffui;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
-import org.cirdles.fileinputstuff.Person;
 import org.cirdles.fileinputstuff.BinarySerialization;
+import org.cirdles.fileinputstuff.People;
 /**
  *
  * @author RyanBarrett
@@ -18,7 +17,7 @@ import org.cirdles.fileinputstuff.BinarySerialization;
 public class BinarySerializationUI {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        ArrayList<Person> list;
+        People list;
 
         try {
             FileInputStream fileReader = new FileInputStream("Binary/BinarySerialization.ser");

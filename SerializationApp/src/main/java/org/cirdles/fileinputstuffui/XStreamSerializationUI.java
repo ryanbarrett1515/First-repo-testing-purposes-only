@@ -6,9 +6,8 @@
 package org.cirdles.fileinputstuffui;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
-import org.cirdles.fileinputstuff.Person;
+import org.cirdles.fileinputstuff.People;
 import org.cirdles.fileinputstuff.XStreamSerialization;
 
 /**
@@ -21,7 +20,7 @@ public class XStreamSerializationUI {
 
         try {
             File file = new File("XStreamSerialization/XStreamSerialization.xml");
-            ArrayList<Person> list = XStreamSerialization.getList(file);
+            People list = XStreamSerialization.getList(file);
 
             System.out.println("Current people on file: ");
             for (int i = 0; i < list.size(); i++) {

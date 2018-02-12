@@ -18,8 +18,8 @@ import java.util.Scanner;
 public class BinarySerialization {
 
     //returns list of persons
-    public static ArrayList<Person> getList(ObjectInputStream ois) throws Exception {
-        ArrayList<Person> list = new ArrayList<>();
+    public static People getList(ObjectInputStream ois) {
+        People list = new People();
         try {
             while (true) {
                 list.add((Person) ois.readObject());
@@ -30,18 +30,22 @@ public class BinarySerialization {
     }
 
     //makes list of persons on file
-    public static void makeList(ArrayList<Person> list, String name) throws Exception {
-        FileOutputStream finalFile = new FileOutputStream(name);
-        ObjectOutputStream oos = new ObjectOutputStream(finalFile);
-        for (int i = 0; i < list.size(); i++) {
-            oos.writeObject(list.get(i));
+    public static void makeList(People list, String name) {
+        try {
+            FileOutputStream finalFile = new FileOutputStream(name);
+            ObjectOutputStream oos = new ObjectOutputStream(finalFile);
+            for (int i = 0; i < list.size(); i++) {
+                oos.writeObject(list.get(i));
+            }
+            oos.close();
+            finalFile.close();
+        } catch (Exception e) {
+            System.out.println("Exception thrown in makelist: " + e.getMessage());
         }
-        oos.close();
-        finalFile.close();
     }
 
     //gets more people from user
-    public static void getPeople(String entry, Scanner userInput, ArrayList<Person> list) {
+    public static void getPeople(String entry, Scanner userInput, People list) {
         while (!entry.equals("q")) {
             if (entry.equals("a")) {
                 for (int i = 0; i < list.size(); i++) {

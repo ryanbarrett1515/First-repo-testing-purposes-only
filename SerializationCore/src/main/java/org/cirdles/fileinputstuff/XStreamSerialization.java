@@ -20,20 +20,21 @@ public class XStreamSerialization {
 
     public static XStream getXStream() {
         XStream xstream = new XStream();
-        xstream.aliasPackage("people", "java.util.ArrayList");
+        xstream.alias("people", People.class);
+        xstream.alias("list", ArrayList.class);
         xstream.alias("person", Person.class);
         return xstream;
     }
 
     //returns list of persons
-    public static ArrayList<Person> getList(File file) {
+    public static People getList(File file) {
         XStream xStream = getXStream();
-        ArrayList<Person> list = (ArrayList) xStream.fromXML(file);
+        People list = (People) xStream.fromXML(file);
         return list;
     }
 
     //makes list of persons on file
-    public static void makeList(ArrayList<Person> list, File file) throws Exception {
+    public static void makeList(People list, File file) throws Exception {
         XStream xstream = getXStream();
         FileOutputStream fos = new FileOutputStream(file);
         PrintWriter fileWriter = new PrintWriter(fos);
@@ -43,7 +44,7 @@ public class XStreamSerialization {
     }
 
     //gets more people from user
-    public static void getPeople(String entry, Scanner userInput, ArrayList<Person> list) {
+    public static void getPeople(String entry, Scanner userInput, People list) {
         while (!entry.equals("q")) {
             if (entry.equals("a")) {
                 for (int i = 0; i < list.size(); i++) {

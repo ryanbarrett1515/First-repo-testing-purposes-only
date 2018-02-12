@@ -25,8 +25,3 @@ and open the template in the editor.
 .content{
     -fx-background-color:white
 }
-
-.text{
-    -fx-font-size:16px;
-    -fx-font-family:"Times New Roman";
-}
