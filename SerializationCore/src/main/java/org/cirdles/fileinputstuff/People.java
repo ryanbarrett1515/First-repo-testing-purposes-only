@@ -13,37 +13,59 @@ import java.util.ArrayList;
  */
 public class People {
 
-    ArrayList<Person> people;
+    ArrayList<Person> list;
 
     public People(int size) {
-        people = new ArrayList<>(size);
+        list = new ArrayList<>(size);
     }
 
     public People() {
-        people = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
     public void add(Person p) {
-        people.add(p);
+        list.add(p);
     }
 
     public void remove(Person p) {
-        people.remove(p);
+        list.remove(p);
     }
 
     public String peopleToString() {
         String text = "";
-        for (int i = 0; i < people.size(); i++) {
-            text += people.get(i) + "\n";
+        for (int i = 0; i < list.size(); i++) {
+            text += list.get(i) + "\n";
         }
         return text;
     }
 
     public Person get(int i) {
-        return people.get(i);
+        return list.get(i);
     }
 
     public int size() {
-        return people.size();
+        return list.size();
+    }
+
+    public ArrayList<Person> getList() {
+        return list;
+    }
+
+    public boolean equals(Object o) {
+        boolean value = true;
+        if (!(o instanceof People)) {
+            value = false;
+        } else {
+            try {
+                for (int i = 0; i < list.size(); i++) {
+                    if (!list.get(i).equals(((People) o).get(i))) {
+                        value = false;
+                    }
+                }
+            } catch (Exception e) {
+                value = false;
+            }
+        }
+        return value;
     }
 }

@@ -11,7 +11,6 @@ package org.cirdles.fileinputstuff;
  */
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.jdom2.output.Format;
@@ -48,7 +47,7 @@ public class XMLSerialization {
         People current = getList(file);
         Element root = doc.getRootElement();
         Element base = root.getChild("list");
-        for (int i = list.size() - current.size(); i < list.size(); i++) {
+        for (int i = current.size(); i < list.size(); i++) {
             Element person = new Element("person");
             person.addContent(new Element("first").setText(list.get(i).getFirstName()));
             person.addContent(new Element("last").setText(list.get(i).getLastName()));

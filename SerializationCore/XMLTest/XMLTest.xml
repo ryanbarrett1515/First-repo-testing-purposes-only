@@ -1,5 +1,5 @@
 <people>
-  <people>
+  <list>
     <person>
       <firstName>Mike</firstName>
       <lastName>Tyson</lastName>
@@ -15,5 +15,5 @@
       <lastName>Barrett</lastName>
       <DOB>5/12/1999</DOB>
     </person>
-  </people>
+  </list>
 </people>

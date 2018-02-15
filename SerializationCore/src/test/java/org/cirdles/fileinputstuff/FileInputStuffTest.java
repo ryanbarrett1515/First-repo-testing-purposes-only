@@ -5,7 +5,6 @@
  */
 package org.cirdles.fileinputstuff;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.Test;
 import java.io.FileInputStream;
@@ -24,7 +23,7 @@ public class FileInputStuffTest {
         try {
             System.out.println("getList");
             Scanner fileScanner = new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV"));
-            ArrayList<Person> expResult = new ArrayList<>();
+            People expResult = new People();
             expResult.add(new Person("Mike", "Tyson", "1905"));
             expResult.add(new Person("first", "last", "date"));
             expResult.add(new Person("Ryan", "Barrett", "5/12/1999"));
@@ -44,8 +43,7 @@ public class FileInputStuffTest {
     public void testMakeList() throws Exception {
         System.out.println("makeList");
         People expResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
-        String name = "PeopleTest/PeopleTest.CSV";
-        FileInputStuff.makeList(expResult, name);
+        FileInputStuff.makeList(expResult, "PeopleTest/PeopleTest.CSV");
         People actualResult = FileInputStuff.getList(new Scanner(new FileInputStream("PeopleTest/PeopleTest.CSV")));
         assertEquals(actualResult, expResult);
     }
