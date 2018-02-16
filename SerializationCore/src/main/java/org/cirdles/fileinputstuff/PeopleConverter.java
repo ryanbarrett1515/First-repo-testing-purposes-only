@@ -23,14 +23,14 @@ public class PeopleConverter implements Converter {
 
     public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
         People people = (People) value;
-        
-        writer.startNode("people");
+
         writer.startNode("list");
-        
-        for(int i = 0; i < people.size(); i++) {
+
+        for (int i = 0; i < people.size(); i++) {
             Person person = people.get(i);
+
             writer.startNode("person");
-            
+
             writer.startNode("first");
             writer.setValue(person.getFirstName());
             writer.endNode();
@@ -38,17 +38,42 @@ public class PeopleConverter implements Converter {
             writer.setValue(person.getLastName());
             writer.endNode();
             writer.startNode("dob");
+            writer.setValue(person.getDOB());
             writer.endNode();
-            
+
             writer.endNode();
         }
-        
-        writer.endNode();
+
         writer.endNode();
     }
 
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
         People people = new People();
+
+        reader.moveDown();
+        try {
+            while (true) {
+                reader.moveDown();
+
+                reader.moveDown();
+                String first = reader.getValue();
+                reader.moveUp();
+
+                reader.moveDown();
+                String last = reader.getValue();
+                reader.moveUp();
+
+                reader.moveDown();
+                String dob = reader.getValue();
+                reader.moveUp();
+
+                reader.moveUp();
+
+                people.add(new Person(first, last, dob));
+            }
+        } catch (Exception e) {
+        }
+
         return people;
     }
 }

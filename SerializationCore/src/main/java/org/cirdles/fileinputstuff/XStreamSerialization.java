@@ -23,6 +23,7 @@ public class XStreamSerialization {
         xstream.alias("people", People.class);
         xstream.alias("list", ArrayList.class);
         xstream.alias("person", Person.class);
+        xstream.registerConverter(new PeopleConverter());
         return xstream;
     }
 

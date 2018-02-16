@@ -1,19 +1,19 @@
 <people>
   <list>
     <person>
-      <firstName>Mike</firstName>
-      <lastName>Tyson</lastName>
-      <DOB>1905</DOB>
+      <first>Mike</first>
+      <last>Tyson</last>
+      <dob>1905</dob>
     </person>
     <person>
-      <firstName>first</firstName>
-      <lastName>last</lastName>
-      <DOB>date</DOB>
+      <first>first</first>
+      <last>last</last>
+      <dob>date</dob>
     </person>
     <person>
-      <firstName>Ryan</firstName>
-      <lastName>Barrett</lastName>
-      <DOB>5/12/1999</DOB>
+      <first>Ryan</first>
+      <last>Barrett</last>
+      <dob>5/12/1999</dob>
     </person>
   </list>
 </people>
