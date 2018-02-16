@@ -8,7 +8,7 @@
 # Gradle
 .gradle/
 build/
-/Squid/.nb-gradle/
+/Serialization/.nb-gradle/
 
 # Netbeans
 nb-configuration.xml
